@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Moni & Co - Arte en Azúcar. Especialistas en flores de azúcar hechas a mano y objetos decorativos comestibles.">
+    <title>Moni & Co | Arte en Azúcar</title>
+    
+    <!-- Fuentes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #e5989b;
+            --secondary-color: #f7ede2;
+            --accent-color: #b5838d;
+            --text-color: #4a4a4a;
+            --bg-color: #fff5f6;
+            --whatsapp-color: #25d366;
+            --instagram-color: #e1306c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        /* --- HEADER & MENÚ HAMBURGUESA --- */
+        header {
+            background-color: #ffffff;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(229, 152, 155, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-icon {
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--accent-color);
+            background: none;
+            border: none;
+            user-select: none;
+            width: 32px;
+            text-align: left;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .header-spacer {
+            width: 32px;
+        }
+
+        /* Menú Lateral Desplegable */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+            transition: left 0.3s ease-in-out;
+            z-index: 200;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .side-menu.active {
+            left: 0;
+        }
+
+        .close-btn {
+            align-self: flex-end;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--accent-color);
+            background: none;
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--bg-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .menu-link:hover {
+            color: var(--primary-color);
+        }
+
+        /* Submenú desplegable */
+        .submenu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #fff9f9;
+            border-radius: 8px;
+            margin-left: 0.5rem;
+        }
+
+        .submenu.open {
+            max-height: 200px;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem;
+            transition: color 0.2s, padding-left 0.2s;
+        }
+
+        .submenu a:hover {
+            color: var(--primary-color);
+            padding-left: 1.3rem;
+        }
+
+        /* Fondo oscuro al abrir menú */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            z-index: 150;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* --- PORTADA / HERO --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1526717983499-1c45240f90ab?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        /* --- SECCIÓN NUESTRA HISTORIA --- */
+        .history-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 8px 20px rgba(229, 152, 155, 0.12);
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .history-section h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .history-section p {
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .history-highlight {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--primary-color);
+            font-size: 1.15rem;
+        }
+
+        /* --- SECCIONES Y CONTENEDORES --- */
+        .container {
+            max-width: 1100px;
+            margin: 3.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Control de vistas (Ocultar por defecto las secciones de catálogo) */
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active-view {
+            display: block;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* --- GALERÍA EN GRID --- */
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(229, 152, 155, 0.12);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- BANNER PRESUPUESTO PERSONALIZADO --- */
+        .custom-budget-banner {
+            background-color: var(--secondary-color);
+            border: 2px dashed var(--primary-color);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            box-shadow: 0 4px 15px rgba(229, 152, 155, 0.15);
+        }
+
+        .custom-budget-banner h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-color);
+            font-size: 1.7rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .custom-budget-banner p {
+            color: #555;
+            margin-bottom: 1.4rem;
+            font-size: 0.98rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-budget {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-budget:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* --- BARRA FIJA INFERIOR --- */
+        .bottom-contact-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            border-top: 1px solid #ffe0e3;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+            padding: 0.7rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.8rem;
+            z-index: 99;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.03);
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-item.whatsapp { color: #1ebe57; }
+        .contact-item.instagram { color: var(--instagram-color); }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.4rem; }
+            .hero h2 { font-size: 2.2rem; }
+            .bottom-contact-bar { gap: 1rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Capa oscura detrás del menú -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Menú Lateral Desplegable -->
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" id="btnCloseMenu" aria-label="Cerrar menú">&times;</button>
+        
+        <a href="#" class="menu-link nav-trigger" data-target="view-inicio">Inicio</a>
+        
+        <!-- Opción Flores con Submenú -->
+        <button class="menu-link" id="btnSubmenu" aria-expanded="false" aria-controls="submenuFlores">
+            <span>Flores de Azúcar</span>
+            <span id="arrow">▾</span>
+        </button>
+        <div class="submenu" id="submenuFlores">
+            <a href="#" class="nav-trigger" data-target="view-flores">🌸 Ver Catálogo</a>
+        </div>
+
+        <a href="#" class="menu-link nav-trigger" data-target="view-arte">Arte en Azúcar</a>
+        <a href="#contacto" class="menu-link" onclick="closeSideMenu()">Contacto</a>
+    </div>
+
+    <!-- Header Principal -->
+    <header>
+        <button class="menu-icon" id="btnOpenMenu" aria-label="Abrir menú">☰</button>
+        <h1>Moni & Co</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <!-- PORTADA / HERO (Común o solo en inicio) -->
+    <section class="hero" id="inicio-hero">
+        <h2>Arte en Azúcar</h2>
+        <p>Piezas comestibles hechas a mano con pasión, elegancia y cuidado en cada detalle.</p>
+    </section>
+
+    <main class="container">
+        
+        <!-- ================= VISTA 1: INICIO ================= -->
+        <div id="view-inicio" class="page-view active-view">
+            <section class="history-section">
+                <h3>Nuestra Historia</h3>
+                <p>
+                    <strong>Moni & Co</strong> nació del amor por la artesanía en azúcar y el deseo de transformar momentos especiales en recuerdos inolvidables. Lo que comenzó como una búsqueda apasionada por dominar la técnica del modelado fino en azúcar, se convirtió en un taller dedicado a la creación de piezas delicadas, realistas y completamente personalizadas.
+                </p>
+                <p class="history-highlight">
+                    "Cada flor y cada objeto es trabajado pacientemente a mano, pétalo por pétalo y detalle por detalle."
+                </p>
+            </section>
+        </div>
+
+        <!-- ================= VISTA 2: FLORES DE AZÚCAR ================= -->
+        <div id="view-flores" class="page-view">
+            <section>
+                <div class="section-header">
+                    <span class="section-badge">Catálogo Exclusivo</span>
+                    <h2 class="section-title">Flores de Azúcar</h2>
+                    <p class="section-subtitle">Variedades confeccionadas íntegramente en azúcar con acabados delicados.</p>
+                </div>
+                
+                <div class="grid-gallery">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1526717983499-1c45240f90ab?auto=format&fit=crop&w=600&q=80" alt="Rosas de Azúcar">
+                        <div class="card-content">
+                            <h4>Rosas en Azúcar</h4>
+                            <p>Modeladas pétalo por pétalo en pasta de azúcar.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80" alt="Peonías de Azúcar">
+                        <div class="card-content">
+                            <h4>Peonías en Azúcar</h4>
+                            <p>Elegantes y de gran detalle para arreglos especiales.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= VISTA 3: ARTE EN AZÚCAR ================= -->
+        <div id="view-arte" class="page-view">
+            <section>
+                <div class="section-header">
+                    <span class="section-badge">Modelados & Adornos</span>
+                    <h2 class="section-title">Arte en Azúcar</h2>
+                    <p class="section-subtitle">Objetos, figuras y elementos decorativos tridimensionales creados en azúcar.</p>
+                </div>
+
+                <div class="grid-gallery">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80" alt="Objetos en Azúcar">
+                        <div class="card-content">
+                            <h4>Objetos & Figuras</h4>
+                            <p>Modelados tridimensionales únicos en masa de azúcar.</p>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Puntillas y Encajes">
+                        <div class="card-content">
+                            <h4>Encajes & Detalles</h4>
+                            <p>Estructuras y blondas comestibles para complementar tus diseños.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Banner para presupuestos personalizados -->
+                <div class="custom-budget-banner">
+                    <h3>¿Tenés un diseño u objeto en mente?</h3>
+                    <p>Si buscás una flor en particular o un objeto personalizado en azúcar, escribinos con tu idea y te armamos un presupuesto a medida.</p>
+                    <a href="https://wa.me/598096432202?text=%C2%A1Hola!%20Quisiera%20consultar%20por%20un%20presupuesto%20personalizado." target="_blank" rel="noopener noreferrer" class="btn-budget">Pedir Presupuesto</a>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Barra de Contacto Fija Abajo -->
+    <footer class="bottom-contact-bar" id="contacto">
+        <a href="https://wa.me/598096432202" target="_blank" rel="noopener noreferrer" class="contact-item whatsapp">
+            <svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true">
+                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+            </svg>
+            <span>096432202</span>
+        </a>
+
+        <a href="https://instagram.com/floresdeazucarmoni.co" target="_blank" rel="noopener noreferrer" class="contact-item instagram">
+            <svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true">
+                <path d="M224.1 141.1c-43.6 0-78.9 35.3-78.9 78.9s35.3 78.9 78.9 78.9 78.9-35.3 78.9-78.9-35.3-78.9-78.9-78.9zm0 129.7c-28 0-50.8-22.8-50.8-50.8s22.8-50.8 50.8-50.8 50.8 22.8 50.8 50.8-22.8 50.8-50.8 50.8zm116.1-133.2c-10.1 0-18.3 8.2-18.3 18.3s8.2 18.3 18.3 18.3 18.3-8.2 18.3-18.3-8.2-18.3-18.3-18.3zm81.4 28.9c-2.4-50.7-13.9-95.7-51.2-133-37.3-37.3-82.3-48.8-133-51.2-52.4-3-209.6-3-262 0-50.7 2.4-95.7 13.9-133 51.2-37.3 37.3-48.8 82.3-51.2 133-3 52.4-3 209.6 0 262 2.4 50.7 13.9 95.7 51.2 133 37.3 37.3 82.3 48.8 133 51.2 52.4 3 209.6 3 262 0 50.7-2.4 95.7-13.9 133-51.2 37.3-37.3 48.8-82.3 51.2-133 3-52.4 3-209.6 0-262zm-47.3 226.7c-9.1 22.9-26.7 40.5-49.6 49.6-36.1 14.3-122 11-160.7 11s-124.7 3.2-160.7-11c-22.9-9.1-40.5-26.7-49.6-49.6-14.3-36.1-11-122-11-160.7s-3.2-124.7 11-160.7c9.1-22.9 26.7-40.5 49.6-49.6 36.1-14.3 122-11 160.7-11s124.7-3.2 160.7 11c22.9 9.1 40.5 26.7 49.6 49.6 14.3 36.1 11 122 11 160.7s3.3 124.7-11 160.7z"/>
+            </svg>
+            <span>@floresdeazucarmoni.co</span>
+        </a>
+    </footer>
+
+    <!-- JavaScript para alternar entre vistas del menú -->
+    <script>
+        const sideMenu = document.getElementById("sideMenu");
+        const overlay = document.getElementById("overlay");
+        const submenuFlores = document.getElementById("submenuFlores");
+        const arrow = document.getElementById("arrow");
+
+        const btnOpen = document.getElementById("btnOpenMenu");
+        const btnClose = document.getElementById("btnCloseMenu");
+        const btnSubmenu = document.getElementById("btnSubmenu");
+
+        function openSideMenu() {
+            sideMenu.classList.add("active");
+            overlay.classList.add("active");
+        }
+
+        function closeSideMenu() {
+            sideMenu.classList.remove("active");
+            overlay.classList.add("active") === false ? overlay.classList.remove("active") : overlay.classList.remove("active");
+        }
+
+        function toggleSubmenu() {
+            const isOpen = submenuFlores.classList.toggle("open");
+            arrow.textContent = isOpen ? "▴" : "▾";
+            btnSubmenu.setAttribute("aria-expanded", isOpen);
+        }
+
+        if (btnOpen) btnOpen.addEventListener("click", openSideMenu);
+        if (btnClose) btnClose.addEventListener("click", closeSideMenu);
+        if (overlay) overlay.addEventListener("click", closeSideMenu);
+        if (btnSubmenu) btnSubmenu.addEventListener("click", toggleSubmenu);
+
+        // Lógica para cambiar de vista (Secciones independientes)
+        const navTriggers = document.querySelectorAll(".nav-trigger");
+        const views = document.querySelectorAll(".page-view");
+        const heroSection = document.getElementById("inicio-hero");
+
+        navTriggers.forEach(trigger => {
+            trigger.addEventListener("click", function (e) {
+                e.preventDefault();
+                const targetViewId = this.getAttribute("data-target");
+
+                // Ocultar todas las vistas
+                views.forEach(view => view.classList.remove("active-view"));
+
+                // Mostrar la vista seleccionada
+                const targetView = document.getElementById(targetViewId);
+                if (targetView) {
+                    targetView.classList.add("active-view");
+                }
+
+                // Mostrar la portada (hero) solo en el inicio, o mantenerla según prefieras
+                if (targetViewId === "view-inicio") {
+                    heroSection.style.display = "flex";
+                } else {
+                    heroSection.style.display = "none"; // Oculta la portada al entrar al catálogo o arte en azúcar
+                }
+
+                // Cerrar el menú lateral automáticamente
+                closeSideMenu();
+            });
+        });
+    </script>
+</body>
+</html>
